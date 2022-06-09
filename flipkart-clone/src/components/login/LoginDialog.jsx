@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { Dialog, DialogContent, TextField, Box, Button, Typography, styled } from '@mui/material';
 
-// import { authenticateLogin, authenticateSignup } from '../../service/api';
+import { authenticateLogin, authenticateSignup } from '../../service/api';
 
 const Component = styled(DialogContent)`
     height: 70vh;
@@ -72,7 +72,8 @@ const Image = styled(Box)`
     
     & > p, & > h5 {
         color: #FFFFFF;
-        font-weight: 600;  
+        font-weight: 600; 
+ 
     }
 `;
 
@@ -99,7 +100,7 @@ const accountInitialValues = {
     signup: {
         view: 'signup',
         heading: "Looks like you're new here",
-        subHeading: 'Signup to get started'
+        subHeading: 'Sign up with your mobile number to get started'
     }
 }
 
@@ -121,23 +122,23 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
         setSignup({ ...signup, [e.target.name]: e.target.value });
     }
 
-    // const loginUser = async() => {
-    //     let response = await authenticateLogin(login);
-    //     if(!response) 
-    //         showError(true);
-    //     else {
-    //         showError(false);
-    //         handleClose();
-    //         setAccount(login.username);
-    //     }
-    // }
+    const loginUser = async() => {
+        let response = await authenticateLogin(login);
+        if(!response) 
+            showError(true);
+        else {
+            showError(false);
+            handleClose();
+            setAccount(login.username);
+        }
+    }
 
-    // const signupUser = async() => {
-    //     let response = await authenticateSignup(signup);
-    //     if(!response) return;
-    //     handleClose();
-    //     setAccount(signup.username);
-    // }
+    const signupUser = async() => {
+        let response = await authenticateSignup(signup);
+        if(!response) return;
+        handleClose();
+        setAccount(signup.username);
+    }
     
     const toggleSignup = () => {
         toggleAccount(accountInitialValues.signup);
@@ -154,7 +155,7 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
                 <Box style={{display: 'flex', height: '100%'}}>
                     <Image>
                         <Typography variant="h5">{account.heading}</Typography>
-                        <Typography style={{marginTop: -30, marginLeft: 35, marginRight: 70}}>{account.subHeading}</Typography>
+                        <Typography style={{marginTop: -30, marginLeft: 35, marginRight: 60, color: '#d8d8d8'}}>{account.subHeading}</Typography>
                     </Image>
                     {
                         account.view === 'login' ? 
@@ -163,8 +164,8 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
                             { error && <Error>Please enter valid Email ID/Mobile number</Error> }
                             <TextField variant="standard" onChange={(e) => onValueChange(e)} name='password' label='Enter Password' />
                             <Text>By continuing, you agree to Flipkart's Terms of Use and Privacy Policy.</Text>
-                            {/* <LoginButton onClick={() => loginUser()} >Login</LoginButton> */}
-                            <LoginButton>Login</LoginButton>
+                            <LoginButton onClick={() => loginUser()} >Login</LoginButton>
+                            {/* <LoginButton>Login</LoginButton> */}
                             <Text style={{textAlign:'center'}}>OR</Text>
                             <RequestOTP>Request OTP</RequestOTP>
                             <CreateAccount onClick={() => toggleSignup()}>New to Flipkart? Create an account</CreateAccount>
@@ -177,7 +178,7 @@ const LoginDialog = ({ open, setOpen, setAccount }) => {
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='email' label='Enter Email' />
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='password' label='Enter Password' />
                             <TextField variant="standard" onChange={(e) => onInputChange(e)} name='phone' label='Enter Phone' />
-                            {/* <LoginButton onClick={() => signupUser()} >Continue</LoginButton> */}
+                            <LoginButton onClick={() => signupUser()}>Continue</LoginButton>
                         </Wrapper>
                     }
                 </Box>
