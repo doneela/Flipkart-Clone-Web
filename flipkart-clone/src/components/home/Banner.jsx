@@ -5,10 +5,14 @@ import {  styled } from '@mui/material';
 
 import {bannerData} from '../../constants/data';
 
-const Image =styled ('Img')({
-    width: '100%',
-    height: 280
-})
+const Image = styled('img')(({ theme }) => ({
+  width: '100%',
+  height: 280,
+  [theme.breakpoints.down('sm')]: {
+      objectFit: 'cover',
+      height: 180
+  }
+}));
 
 const responsive = {
 
@@ -27,28 +31,29 @@ const responsive = {
 }; 
 
 
-const Banner = ()=>{
-    return (
-        <Carousel responsive={responsive}
-        swipeable={false}
-        draggable={false}
-        infinite={true}
-        autoPlay={true}
-        autoPlaySpeed={4000}
-        keyBoardControl={true}
-        slidesToSlide={1}
-        dotListClass="custom-dot-list-style"
-        itemClass="carousel-item-padding-40-px"
-        containerClass="carousel-container"
-        
-  >
-            {
-                bannerData.map(data=>(
-                    <Image src = {data.url} alt ="banner"/>
-                ))
-            }
-        </Carousel>
-    )
+const Banner = () => {
+  return (
+      <Carousel
+          swipeable={false}
+          draggable={false}
+          responsive={responsive}
+          infinite={true}
+          autoPlay={true}
+          autoPlaySpeed={4000}
+          keyBoardControl={true}
+          showDots={false}
+          slidesToSlide={1}
+          containerClass="carousel-container"
+          dotListClass="custom-dot-list-style"
+          itemClass="carousel-item-padding-40-px"
+      >
+          {
+              bannerData.map(image => (
+                  <Image src={image.url} alt="banner" id={image.id} />
+              ))
+          }
+      </Carousel>
+  )
 }
 
 export default Banner;
