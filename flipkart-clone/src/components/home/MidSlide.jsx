@@ -39,7 +39,7 @@ const MidSlide = ({ products }) => {
                 />
             </LeftComponent>
             <RightComponent>
-                <img src={adURL} style={{width: 217}}/>
+                <img src={adURL} alt='' style={{width: 217}}/>
             </RightComponent>
         </Component>
     )

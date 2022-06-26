@@ -51,18 +51,18 @@ const TotalView = ({ cartItems }) => {
         totalAmount();
     }, [cartItems]);
     
-    const totalAmount = () => {
-        let price = 0, discount = 0;
-        console.log(cartItems);
-        cartItems.map(item => {
-            price += item.price.mrp
-            discount += (item.price.mrp - item.price.cost) 
-        })
-        setPrice(price);
-        setDiscount(discount);
-    }
+const totalAmount = () => {
+    let price = 0, discount = 0;
+    console.log(cartItems);
+    cartItems.map(item => {
+        price += item.price.mrp;
+        discount += (item.price.mrp - item.price.cost);
+    })
+    setPrice(price);
+    setDiscount(discount);
+}
 
-    return (
+return (
         <Box>  {/* className={classes.component}> */}
             <Header>
                 <Heading>PRICE DETAILS</Heading>
