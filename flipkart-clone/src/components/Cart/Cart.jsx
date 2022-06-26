@@ -8,7 +8,7 @@ import { addToCart, removeFromCart } from '../../redux/actions/cartActions';
 
 import TotalView from './TotalView';
 import EmptyCart from './EmptyCart';
-import CartItem from './CartItem';
+import CartItem from './CartItem.jsx';
 
 import { post } from '../../utils/paytm';
 import { payUsingPaytm } from '../../service/api';
